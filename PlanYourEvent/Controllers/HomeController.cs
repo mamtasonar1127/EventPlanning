@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PlanYourEvent.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,8 +7,13 @@ using System.Web.Mvc;
 
 namespace PlanYourEvent.Controllers
 {
+
     public class HomeController : Controller
     {
+        //connect db
+
+        private DbModel db = new DbModel();
+
         public ActionResult Index()
         {
             return View();
@@ -28,8 +34,10 @@ namespace PlanYourEvent.Controllers
         }
 
         public ActionResult Events()
-        {
-            return View();
+        { 
+            //use the eventtype model to retrieve the entire event list
+            var events = db.Eventtypes.ToList();
+            return View(events);
         }
     }
 }

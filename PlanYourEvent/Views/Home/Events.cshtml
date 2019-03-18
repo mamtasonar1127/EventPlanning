@@ -1,8 +1,14 @@
-﻿
+﻿@model  IEnumerable<PlanYourEvent.Models.Eventtype>
+
 @{
     ViewBag.Title = "Events";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Events</h2>
+<ul>
+    @foreach (var p in Model)
+    {
+        <li>@Html.ActionLink(p.Event_Name, "ViewEvent", "Home", new { Event_Name = p.Event_Name }, null)</li>
+    }
+</ul>
 
