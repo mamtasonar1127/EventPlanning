@@ -17,7 +17,7 @@ namespace PlanYourEvent.Controllers
         // GET: Eventtypes
         public ActionResult Index()
         {
-            return View(db.Eventtypes.ToList());
+            return View(db.Eventtypes.OrderBy(c => c.Event_Name).ToList());
         }
 
         // GET: Eventtypes/Details/5
