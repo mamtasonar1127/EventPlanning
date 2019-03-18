@@ -176,6 +176,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\EventDespsController.cs" />
     <Compile Include="Controllers\EventtypesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -213,6 +214,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\sorttable.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -253,6 +255,11 @@
     <Content Include="Views\Eventtypes\Details.cshtml" />
     <Content Include="Views\Eventtypes\Edit.cshtml" />
     <Content Include="Views\Eventtypes\Index.cshtml" />
+    <Content Include="Views\EventDesps\Create.cshtml" />
+    <Content Include="Views\EventDesps\Delete.cshtml" />
+    <Content Include="Views\EventDesps\Details.cshtml" />
+    <Content Include="Views\EventDesps\Edit.cshtml" />
+    <Content Include="Views\EventDesps\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,14 +14,18 @@ namespace PlanYourEvent.Models
 
         [Required]
         [StringLength(255)]
+        [Display(Name = "Event Name")]
         public string ED_Name { get; set; }
 
         [StringLength(8000)]
         public string Description { get; set; }
 
+        [DisplayFormat(DataFormatString = "{0:c}")]
+        [Range(0.01,100000)]
         public decimal Price { get; set; }
 
         [StringLength(255)]
+        [Display(Name = "Image")]
         public string Photo { get; set; }
 
         public int Event_Id { get; set; }
