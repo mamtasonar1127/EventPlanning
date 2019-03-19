@@ -50,10 +50,30 @@ namespace PlanYourEvent.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "EDId,ED_Name,Description,Price,Photo,Event_Id")] EventDesp eventDesp)
+        public ActionResult Create([Bind(Include = "EDId,ED_Name,Description,Price,Photo,Event_Id")] EventDesp eventDesp,String CurrentPhoto)
         {
             if (ModelState.IsValid)
             {
+                //check for file upload
+                if (Request.Files != null)
+                {
+                    var file = Request.Files[0];
+
+                    if (file.FileName != null && file.ContentLength > 0)
+                    {
+                        string fName = Path.GetFileName(file.FileName);
+
+                        string path = Server.MapPath("~/Content/Images/" + fName);
+                        file.SaveAs(path);
+                        eventDesp.Photo = fName;
+                    }
+                }
+                else
+                {
+                    //no new upload, keep old photo
+                    eventDesp.Photo = CurrentPhoto;
+                }
+
                 db.EventDesps.Add(eventDesp);
                 db.SaveChanges();
                 return RedirectToAction("Index");
