@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -86,8 +87,24 @@ namespace PlanYourEvent.Controllers
         {
             if (ModelState.IsValid)
             {
+                //check for file upload
+                if (Request.Files != null)
+                {
+                    var file = Request.Files[0];
+
+                    if (file.FileName != null && file.ContentLength > 0)
+                    {
+                        string fName = Path.GetFileName(file.FileName);
+
+                        string path = Server.MapPath("~/Content/Images/" + fName);
+                        file.SaveAs(path);
+                        eventDesp.Photo = fName;
+                    }
+                }
+
                 db.Entry(eventDesp).State = EntityState.Modified;
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             ViewBag.Event_Id = new SelectList(db.Eventtypes, "Event_Id", "Event_Name", eventDesp.Event_Id);
