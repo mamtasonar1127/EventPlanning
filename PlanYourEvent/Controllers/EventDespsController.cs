@@ -11,6 +11,7 @@ using PlanYourEvent.Models;
 
 namespace PlanYourEvent.Controllers
 {
+    [Authorize]
     public class EventDespsController : Controller
     {
         private DbModel db = new DbModel();
@@ -83,7 +84,7 @@ namespace PlanYourEvent.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "EDId,ED_Name,Description,Price,Photo,Event_Id")] EventDesp eventDesp)
+        public ActionResult Edit([Bind(Include = "EDId,ED_Name,Description,Price,Photo,Event_Id")] EventDesp eventDesp,String CurrentPhoto)
         {
             if (ModelState.IsValid)
             {
@@ -100,6 +101,11 @@ namespace PlanYourEvent.Controllers
                         file.SaveAs(path);
                         eventDesp.Photo = fName;
                     }
+                }
+                else
+                {
+                    //no new upload, keep old photo
+                    eventDesp.Photo = CurrentPhoto;
                 }
 
                 db.Entry(eventDesp).State = EntityState.Modified;

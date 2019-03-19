@@ -7,9 +7,12 @@
 
 <h2>Events We Organize</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+@if(Request.IsAuthenticated)
+{ 
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
 <table class="table table-striped table-hover sortable">
     <tr>
         <th>
@@ -19,7 +22,11 @@
         <!-- <th>
          @Html.DisplayNameFor(model => model.Photo)
      </th>-->
-        <th></th>
+
+        @if (Request.IsAuthenticated)
+        {
+            <th>Actions</th>
+        }
     </tr>
 
 @foreach (var item in Model) {
@@ -31,11 +38,18 @@
         <!-- <td>
                 @Html.DisplayFor(modelItem => item.Photo)
             </td>-->
+
+        @if (Request.IsAuthenticated)
+        {
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Event_Id }) |
-                @Html.ActionLink("Details","Details", new { id=item.Event_Id}) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Event_Id })
+                @Html.ActionLink("Edit", "Edit", new { id = item.Event_Id }) |
+               
+                @Html.ActionLink("Delete", "Delete", new { id = item.Event_Id })
             </td>
+        }
+
+        
+            <td> @Html.ActionLink("Details", "Details", new { id = item.Event_Id }) </td>
         </tr>
     }
 

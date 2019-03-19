@@ -10,16 +10,19 @@ using PlanYourEvent.Models;
 
 namespace PlanYourEvent.Controllers
 {
+    [Authorize]
     public class EventtypesController : Controller
     {
         private DbModel db = new DbModel();
 
+        [AllowAnonymous]
         // GET: Eventtypes
         public ActionResult Index()
         {
             return View(db.Eventtypes.OrderBy(c => c.Event_Name).ToList());
         }
 
+        [AllowAnonymous]
         // GET: Eventtypes/Details/5
         public ActionResult Details(int? id)
         {
@@ -35,6 +38,7 @@ namespace PlanYourEvent.Controllers
             return View(eventtype);
         }
 
+        
         // GET: Eventtypes/Create
         public ActionResult Create()
         {
