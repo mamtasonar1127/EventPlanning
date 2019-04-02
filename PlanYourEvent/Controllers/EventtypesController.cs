@@ -13,12 +13,18 @@ namespace PlanYourEvent.Controllers
     [Authorize]
     public class EventtypesController : Controller
     {
+        IMockEventtypes db;
         // private DbModel db = new DbModel();
         //Constructor
 
         public EventtypesController()
         {
-            
+            this.db = new IDataEventtypes();
+        }
+
+        public EventtypesController(IDataEventtypes mockDb)
+        {
+            this.db = mockDb;
         }
 
 
@@ -37,7 +43,9 @@ namespace PlanYourEvent.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Eventtype eventtype = db.Eventtypes.Find(id);
+            // Eventtype eventtype = db.Eventtypes.Find(id);
+            Eventtype eventtype = db.eventtypes.SingleOrDefault(c => c.Event_Id == id);
+            
             if (eventtype == null)
             {
                 return HttpNotFound();
@@ -61,8 +69,9 @@ namespace PlanYourEvent.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Eventtypes.Add(eventtype);
-                db.SaveChanges();
+                //db.Eventtypes.Add(eventtype);
+                //db.SaveChanges();
+                db.Save(eventtype);
                 return RedirectToAction("Index");
             }
 
@@ -76,7 +85,8 @@ namespace PlanYourEvent.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Eventtype eventtype = db.Eventtypes.Find(id);
+            // Eventtype eventtype = db.Eventtypes.Find(id);
+            Eventtype eventtype = db.eventtypes.SingleOrDefault(c => c.Event_Id == id);
             if (eventtype == null)
             {
                 return HttpNotFound();
@@ -93,8 +103,9 @@ namespace PlanYourEvent.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(eventtype).State = EntityState.Modified;
-                db.SaveChanges();
+                //db.Entry(eventtype).State = EntityState.Modified;
+                //db.SaveChanges();
+                db.Save(eventtype);
                 return RedirectToAction("Index");
             }
             return View(eventtype);
@@ -107,7 +118,8 @@ namespace PlanYourEvent.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Eventtype eventtype = db.Eventtypes.Find(id);
+            // Eventtype eventtype = db.Eventtypes.Find(id);
+            Eventtype eventtype = db.eventtypes.SingleOrDefault(c => c.Event_Id == id);
             if (eventtype == null)
             {
                 return HttpNotFound();
@@ -120,9 +132,13 @@ namespace PlanYourEvent.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Eventtype eventtype = db.Eventtypes.Find(id);
-            db.Eventtypes.Remove(eventtype);
-            db.SaveChanges();
+            //Eventtype eventtype = db.Eventtypes.Find(id);
+            // Eventtype eventtype = db.Eventtypes.Find(id);
+            Eventtype eventtype = db.eventtypes.SingleOrDefault(c => c.Event_Id == id);
+            //db.Eventtypes.Remove(eventtype);
+            //db.SaveChanges();
+            db.Delete(eventtype);
+            db.Delete(eventtype);
             return RedirectToAction("Index");
         }
 

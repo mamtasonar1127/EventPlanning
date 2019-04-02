@@ -9,5 +9,8 @@ namespace PlanYourEvent.Models
     public interface IMockEventtypes
     { 
         IQueryable<Eventtype> eventtypes { get; }
+        Eventtype Save(Eventtype eventtype);
+        void Delete(Eventtype eventtype);
+        void Dispose();
     }
 }

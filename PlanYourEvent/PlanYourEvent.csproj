@@ -187,7 +187,9 @@
     <Compile Include="Models\DbModel.cs" />
     <Compile Include="Models\EventDesp.cs" />
     <Compile Include="Models\Eventtype.cs" />
+    <Compile Include="Models\IDataEventtypes.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IMockEventtypes.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
