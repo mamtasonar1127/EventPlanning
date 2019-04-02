@@ -13,7 +13,14 @@ namespace PlanYourEvent.Controllers
     [Authorize]
     public class EventtypesController : Controller
     {
-        private DbModel db = new DbModel();
+        // private DbModel db = new DbModel();
+        //Constructor
+
+        public EventtypesController()
+        {
+            
+        }
+
 
         [AllowAnonymous]
         // GET: Eventtypes
