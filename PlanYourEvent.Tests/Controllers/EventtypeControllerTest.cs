@@ -14,9 +14,15 @@ namespace PlanYourEvent.Tests.Controllers
         {
             //arrange
 
+            EventtypesController controller = new EventtypesController();
+
             //act
 
+            ViewResult result = controller.Index() as ViewResult;
+
             //assert
+
+            Assert.AreEqual("Index", result.ViewName);
         }
     }
 }
